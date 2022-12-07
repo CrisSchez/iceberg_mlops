@@ -153,7 +153,19 @@ params = {"projectId":project_id,"latestModelDeployment":True,"latestModelBuild"
 modeltest=cml.get_models(params)[0]
 icebergHistory=spark.read.format("iceberg").load("spark_catalog.default.telco_iceberg.history").toPandas()
 
+
+
 import pandas as pd
+
+#----------------- to set how many days ago = 7days -------------------------
+#import datetime as DT
+#now = DT.datetime.now()
+#xtime_ago = today - DT.timedelta(days=0.1)
+#changeDate=pd.to_datetime(xtime_ago)-icebergHistory['made_current_at']
+#changeDate=changeDate[changeDate>='0 days']
+#print(icebergHistory['made_current_at'][changeDate.idxmin()])
+#-----------------------------------------------------------
+
 changeDate=pd.to_datetime(modeltest['latestModelDeployment']['deployedAt'][:18])-icebergHistory['made_current_at']
 changeDate=changeDate[changeDate>='0 days']
 print(icebergHistory['made_current_at'][changeDate.idxmin()])

@@ -13,7 +13,7 @@ import mlflow.sklearn
 experimentId=mlflow.get_experiment_by_name("expRetrain").experiment_id
 dfExperiments=mlflow.search_runs(experiment_ids=experimentId)
 maxmetric=dfExperiments["metrics.precision"].max()
-runId=dfExperiments[dfExperiments["metrics.precision"]==maxmetric].run_id
+runId=dfExperiments[dfExperiments["metrics.precision"]==maxmetric].head(1).run_id
 
 script_descriptor = open("3_trainStrategy_job.py")
 a_script = script_descriptor.read()

@@ -36,6 +36,8 @@ df.write.mode("overwrite").saveAsTable("modtable")
 
   
 spark.sql("MERGE INTO spark_catalog.default.telco_iceberg t USING modtable s ON t.customerid = s.customerid WHEN MATCHED THEN UPDATE SET monthlycharges = s.monthlycharges + t.monthlycharges")
+spark.sql("MERGE INTO spark_catalog.default.telco_iceberg t USING modtable s ON t.customerid = s.customerid WHEN MATCHED THEN UPDATE SET churn = s.churn")
+
 exec(open("1b_create_iceberg_impala.py").read())
 
 spark.read.format("iceberg").load("spark_catalog.default.telco_iceberg.history").show()

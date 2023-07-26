@@ -36,23 +36,25 @@ user_obj = {"id": user_details["id"],
 api_url= cml.host
 # No arguments are required when the default_client method is used inside a session.
 variables=cml.get_environment_variables()
-api_key='c37c5541c2a465d48eedadf0f90f08182d47b1edd951656cfd66576b4aed2279.f507663a491c6cb9363dca09910a63da223a155bffcdd221f279eec8708c2c7b'
+api_key='ed65813c617f98ba699d29e93e9fbcab807ccc9eb4381b689c2b6649e1ef1755.5cea061bf084ae218ffe2aaf91b5e78c9c41f96cdfdf8e6b826b453dcd6729cc'
 api_client=cmlapi.default_client(url=api_url,cml_api_key=api_key)
 api_client.list_projects()
 
 #client = cmlapi.default_client()
 api_instance=api_client
 
+runtime_identifier="docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2023.05.2-b7"
+spark_addon='spark323-19-hf2'
 
 create_jobs_params = {"name": "Check Model",
           "type": "manual",
           #"arguments": str([identificador,choicemetric, threshold,target_columns,drop_input_columns]),
           #"arguments": identificador,
           "project_id": project_id,
-          "runtime_identifier": "docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2022.11.2-b2",
+          "runtime_identifier": runtime_identifier,
           "script": "6_check_model.py",
           "timezone": "Europe/Madrid",
-          "runtime_addon_identifiers": ['spark320-18-hf4'],
+          "runtime_addon_identifiers": [spark_addon],
           "kernel": "python3",
           "cpu" : 2,
           "memory" : 4,
@@ -69,10 +71,10 @@ create_jobs_params = {"name": "avisoPerformance",
           #"arguments": str([identificador,choicemetric, threshold,target_columns,drop_input_columns]),
           #"arguments": identificador,
           "project_id": project_id,
-          "runtime_identifier": "docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2022.11.2-b2",
+          "runtime_identifier": runtime_identifier,
           "script": "7_crearReportes.py",
           "timezone": "Europe/Madrid",
-          "runtime_addon_identifiers": ['spark320-18-hf4'],
+          "runtime_addon_identifiers": [spark_addon],
           "kernel": "python3",
           "cpu" : 2,
           "memory" : 4,
@@ -90,10 +92,10 @@ create_jobs_params = {"name": "retrain",
           #"arguments": str([identificador,choicemetric, threshold,target_columns,drop_input_columns]),
           #"arguments": identificador,
           "project_id": project_id,
-          "runtime_identifier": "docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2022.11.2-b2",
+          "runtime_identifier": runtime_identifier,
           "script": "3_trainStrategy_job.py",
           "timezone": "Europe/Madrid",
-          "runtime_addon_identifiers": ['spark320-18-hf4'],
+          "runtime_addon_identifiers": [spark_addon],
           "kernel": "python3",
           "cpu" : 2,
           "memory" : 4,
@@ -114,10 +116,10 @@ create_jobs_params = {"name": "deploy_best_model",
           #"arguments": str([identificador,choicemetric, threshold,target_columns,drop_input_columns]),
           #"arguments": identificador,
           "project_id": project_id,
-          "runtime_identifier": "docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2022.11.2-b2",
+          "runtime_identifier": runtime_identifier,
           "script": "4_get_champion.py",
           "timezone": "Europe/Madrid",
-          "runtime_addon_identifiers": ['spark320-18-hf4'],
+          "runtime_addon_identifiers": [spark_addon],
           "kernel": "python3",
           "cpu" : 2,
           "memory" : 4,

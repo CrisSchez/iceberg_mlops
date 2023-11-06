@@ -43,7 +43,7 @@ api_client.list_projects()
 #client = cmlapi.default_client()
 api_instance=api_client
 
-runtime_identifier="docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2023.05.2-b7"
+runtime_identifier="docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-workbench-python3.7-standard:2023.08.2-b8"
 spark_addon='spark323-19-hf2'
 
 create_jobs_params = {"name": "Check Model",

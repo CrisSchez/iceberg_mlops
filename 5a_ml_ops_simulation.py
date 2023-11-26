@@ -129,7 +129,7 @@ spark = SparkSession\
     .getOrCreate()
     
 
-dfcurrent = spark.sql("SELECT * FROM default.telco_iceberg").toPandas()
+dfcurrent = spark.sql("SELECT * FROM default.icebergchurn").toPandas()
 
 
 import time
@@ -151,7 +151,7 @@ project_id = cml.get_project()['id']
 params = {"projectId":project_id,"latestModelDeployment":True,"latestModelBuild":True}
 
 modeltest=cml.get_models(params)[0]
-icebergHistory=spark.read.format("iceberg").load("spark_catalog.default.telco_iceberg.history").toPandas()
+icebergHistory=spark.read.format("iceberg").load("spark_catalog.default.icebergchurn.history").toPandas()
 
 
 
@@ -172,7 +172,7 @@ print(icebergHistory['made_current_at'][changeDate.idxmin()])
 
 df=spark.read\
     .option("snapshot-id", icebergHistory['snapshot_id'][changeDate.idxmin()])\
-    .table("spark_catalog.default.telco_iceberg").toPandas()
+    .table("spark_catalog.default.icebergchurn").toPandas()
 df['churn']=dfcurrent['churn']
 model_id = pd.DataFrame(cml.get_models(params))['id'].min()
 latest_model = cml.get_model({"id": model_id, "latestModelDeployment": True, "latestModelBuild": True})

@@ -196,21 +196,21 @@ if ('telco_churn' not in list(spark.sql("show tables in default").toPandas()['ta
 import cml.data_v1 as cmldata
 
 # Show the data in the hive table
-spark.sql("select * from default.telco_churn").show()
+spark.sql("select * from default.icebergchurn").show()
 # this line is better to be run from hue impala
 try:
   #spark.sql("CREATE or REPLACE TABLE telco_iceberg USING iceberg AS SELECT * FROM default.telco_churn")
-  telco_data.write.format("iceberg").mode("overwrite").saveAsTable('default.telco_iceberg')
+  telco_data.write.format("iceberg").mode("overwrite").saveAsTable('default.icebergchurn')
 
 except:
   print("iceberg table already created")
   # To get more detailed information about the hive table you can run this:
-spark.sql("describe formatted default.telco_iceberg").toPandas()
-spark.read.format("iceberg").load("spark_catalog.default.telco_iceberg.history").show()
+spark.sql("describe formatted default.icebergchurn").toPandas()
+spark.read.format("iceberg").load("spark_catalog.default.icebergchurn.history").show()
 
 # To get more detailed information about the hive table you can run this:
 #spark.sql("describe formatted default.telco_churn").toPandas()
-exec(open("1b_create_iceberg_impala.py").read())
+#exec(open("1b_create_iceberg_impala.py").read())
 # Other ways to access data
 
 # To access data from other locations, refer to the

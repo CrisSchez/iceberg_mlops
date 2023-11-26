@@ -110,7 +110,7 @@ storage = os.environ['STORAGE']
 hadoop_user = os.environ['HADOOP_USER_NAME']
 
 # To get more detailed information about the hive table you can run this:
-df = spark.sql("SELECT * FROM default.telco_iceberg").toPandas()
+df = spark.sql("SELECT * FROM default.icebergchurn").toPandas()
 
 
 idcol = 'customerid'
@@ -196,7 +196,7 @@ if len(sys.argv) == 2:
             yaml_text = \
                 """"ModelOpsChurn":
               hive_table_qualified_names:                # this is a predefined key to link to training data
-                - "default.telco_iceberg@cm"               # the qualifiedName of the hive_table object representing                
+                - "default.icebergchurn@cm"               # the qualifiedName of the hive_table object representing                
               metadata:                                  # this is a predefined key for additional metadata
                 query: "select * from historical_data"   # suggested use case: query used to extract training data
                 training_file: "3_trainStrategy_job.py"       # suggested use case: training file used
@@ -254,7 +254,7 @@ if len(sys.argv) == 2:
             yaml_text = \
                 """"ModelOpsChurn":
               hive_table_qualified_names:                # this is a predefined key to link to training data
-                - "default.telco_iceberg@cm"               # the qualifiedName of the hive_table object representing                
+                - "default.icebergchurn@cm"               # the qualifiedName of the hive_table object representing                
               metadata:                                  # this is a predefined key for additional metadata
                 query: "select * from historical_data"   # suggested use case: query used to extract training data
                 training_file: "3_trainStrategy_job.py"       # suggested use case: training file used
